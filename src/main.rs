@@ -224,11 +224,7 @@ fn render(
     // render field
     for y in 0..FIELD_H {
         for x in 0..FIELD_W {
-            let color = if game.effect[y][x] {
-                get_effect_color(game.field[y][x])
-            } else {
-                get_block_color(game.field[y][x])
-            };
+            let color = get_block_color(game.field[y][x]);
             canvas.set_draw_color(color);
             canvas.fill_rect(Rect::new(
                 x as i32 * CELL_SIZE,
@@ -351,21 +347,6 @@ fn get_block_color(color_num: i32) -> Color {
         3 => Color::RGB(128, 255, 255),
         4 => Color::RGB(128, 128, 255),
         5 => Color::RGB(255, 128, 255),
-        _ => {
-            println!("invalid color: {}", color_num);
-            panic!();
-        }
-    }
-}
-
-fn get_effect_color(color_num: i32) -> Color {
-    match color_num {
-        0 => Color::RGB(255, 0, 0),
-        1 => Color::RGB(255, 255, 0),
-        2 => Color::RGB(0, 255, 0),
-        3 => Color::RGB(0, 255, 255),
-        4 => Color::RGB(0, 0, 255),
-        5 => Color::RGB(255, 0, 255),
         _ => {
             println!("invalid color: {}", color_num);
             panic!();
